@@ -55,7 +55,7 @@
             position: absolute;
             font-size: 2rem;
             color: red;
-            animation: explode 1.5s ease-out forwards;
+            animation: explode 3s linear forwards;
         }
         @keyframes explode {
             0% {
@@ -75,40 +75,52 @@
     <div class="message" style="display: none;">I'm Sorry 💖</div>
     
     <script>
-        let delayTime = 6000;
-
+        let delayTime = 2000; 
+        let heartInterval;
+        
         function playMusic() {
             let musicFrame = document.getElementById("music");
             musicFrame.src += "&autoplay=1";
             document.querySelector(".play-button").style.display = "none";
             
+            let checkAudio = setInterval(() => {
+                let musicDocument = musicFrame.contentWindow || musicFrame.contentDocument;
+                if (musicDocument && musicDocument.getElementsByTagName("video")[0]) {
+                    let video = musicDocument.getElementsByTagName("video")[0];
+                    if (!video.paused && video.currentTime > 0) {
+                        clearInterval(checkAudio);
+                        startExplosion();
+                    }
+                }
+            }, 100);
+        }
+        
+        function startExplosion() {
             setTimeout(() => {
-                createHearts();
+                heartInterval = setInterval(createHeart, 200);
                 setTimeout(() => {
                     document.querySelector(".message").style.display = "block";
                 }, 2000);
             }, delayTime);
         }
 
-        function createHearts() {
-            for (let i = 0; i < 50; i++) {
-                let heart = document.createElement("div");
-                heart.classList.add("heart");
-                heart.innerHTML = "❤️";
-                document.body.appendChild(heart);
-                
-                let angle = Math.random() * 2 * Math.PI;
-                let distance = Math.random() * 200 + 50;
-                heart.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
-                heart.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
-                heart.style.left = "50%";
-                heart.style.top = "50%";
-                heart.style.transform = "translate(-50%, -50%)";
-                
-                setTimeout(() => {
-                    heart.remove();
-                }, 1500);
-            }
+        function createHeart() {
+            let heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+            
+            let angle = Math.random() * 2 * Math.PI;
+            let distance = Math.random() * 300 + 50;
+            heart.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
+            heart.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
+            heart.style.left = "50%";
+            heart.style.top = "50%";
+            heart.style.transform = "translate(-50%, -50%)";
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
         }
     </script>
 </body>
