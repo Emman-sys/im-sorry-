@@ -13,6 +13,7 @@
             height: 100vh;
             background-color: #f8d7da;
             margin: 0;
+            overflow: hidden;
         }
         .message {
             font-size: 3rem;
@@ -20,6 +21,8 @@
             color: #721c24;
             opacity: 0;
             animation: fadeBounce 2s ease-in-out forwards;
+            position: relative;
+            z-index: 10;
         }
         @keyframes fadeBounce {
             0% {
@@ -44,19 +47,60 @@
             border-radius: 5px;
             cursor: pointer;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: red;
+            animation: float 3s linear infinite;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
     <button class="play-button" onclick="playMusic()">Play Music</button>
     <iframe id="music" width="0" height="0" src="https://www.youtube.com/embed/SqDjQPoJxiw?si=vbpS0hdbHdepFeQU&start=43" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-    <div class="message">I'm Sorry 💖</div>
+    <div class="message" style="display: none;">I'm Sorry 💖</div>
     
     <script>
+        let delayTime = 1500; // Adjustable delay in milliseconds
+
         function playMusic() {
             let musicFrame = document.getElementById("music");
             musicFrame.src += "&autoplay=1";
             document.querySelector(".play-button").style.display = "none";
+            
+            setTimeout(() => {
+                createHearts();
+                setTimeout(() => {
+                    document.querySelector(".message").style.display = "block";
+                }, 2000);
+            }, delayTime);
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 50; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 2 + 2 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
         }
     </script>
 </body>
