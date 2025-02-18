@@ -88,7 +88,7 @@
         
         function startExplosion() {
             setTimeout(() => {
-                heartInterval = setInterval(createHeart, 200);
+                heartInterval = setInterval(createHeart, 100);
                 setTimeout(() => {
                     document.querySelector(".message").style.display = "block";
                 }, 2000);
@@ -102,7 +102,7 @@
             document.body.appendChild(heart);
             
             let angle = Math.random() * 2 * Math.PI;
-            let distance = Math.random() * 300 + 50;
+            let distance = Math.random() * 1000 + 100;
             heart.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
             heart.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
             heart.style.left = "50%";
