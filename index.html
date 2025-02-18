@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -34,10 +35,29 @@
                 transform: translateY(0);
             }
         }
+        .play-button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #721c24;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/SqDjQPoJxiw?si=vbpS0hdbHdepFeQU&start=43&autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+    <button class="play-button" onclick="playMusic()">Play Music</button>
+    <iframe id="music" width="0" height="0" src="https://www.youtube.com/embed/SqDjQPoJxiw?si=vbpS0hdbHdepFeQU&start=43" frameborder="0" allow="autoplay; encrypted-media"></iframe>
     <div class="message">I'm Sorry 💖</div>
+    
+    <script>
+        function playMusic() {
+            let musicFrame = document.getElementById("music");
+            musicFrame.src += "&autoplay=1";
+            document.querySelector(".play-button").style.display = "none";
+        }
+    </script>
 </body>
 </html>
