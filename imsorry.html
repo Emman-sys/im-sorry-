@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8d7da;
+            margin: 0;
+        }
+        .message {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #721c24;
+            opacity: 0;
+            animation: fadeBounce 2s ease-in-out forwards;
+        }
+        @keyframes fadeBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/SqDjQPoJxiw?si=vbpS0hdbHdepFeQU&start=43&autoplay=1" frameborder="0" allow="autoplay"></iframe>
+    <div class="message">I'm Sorry 💖</div>
+</body>
+</html>
